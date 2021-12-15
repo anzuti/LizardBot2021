@@ -8,20 +8,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 //import libraries
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Joystick;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
 import com.analog.adis16470.frc.ADIS16470_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 
+//UNUSED LIBRARIES 
+
+//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.SPI;
+//import edu.wpi.first.wpilibj.controller.PIDController;
 //import java.util.ResourceBundle.Control;
 //import com.ctre.phoenix.motorcontrol.ControlMode;
 //import edu.wpi.first.wpilibj.SpeedController;
@@ -46,8 +47,8 @@ public class DriveTrain extends SubsystemBase {
 //VARIABLES PARA EL GIROSCOPIO
 private static final double kAngleSetpoint = 0.0; //Angulo al que debe apuntar.
 private static final double kPTurning = 0.1; // propotional turning constant// Constante de proporcionalidad
-private static final double kiTurning = 0.0;
-private static final double kdTurning = 0.0;
+//private static final double kiTurning = 0.0;
+//private static final double kdTurning = 0.0;
 
 // UNCOMMENT IF USING THE ADXR450
 //private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
@@ -61,7 +62,6 @@ private  ADIS16470_IMU imu = new ADIS16470_IMU();
 //VARIABLE PARA AJUSTAR LA VELOCIAD MÁXIMA DE LOS MOTORES.
 private double dampenSpeed = Constants.dampenSpeed;
 private double dampenTurn = Constants.dampenturn;
-//private double rotspeed = Constants.DT_ROTATION_SPEED;
 
 
 //MOTOR GROUPS
@@ -107,7 +107,8 @@ private Encoder leftEncoder = new Encoder(2,3);
 
 
   /** Creates a new DriveTrain. *////////////////////////////////////////////////////////////////////
-  public DriveTrain() {
+  public DriveTrain() 
+  {
     super(); //CONSTRUYE EL OBJETO DEL PADRE.
     
     //Set motors
@@ -122,20 +123,10 @@ private Encoder leftEncoder = new Encoder(2,3);
     rightEncoder.setDistancePerPulse(1./2048);
     rightEncoder.setReverseDirection(true); //cambiar signo para que ambos tengan el mismo sentido
     leftEncoder.setDistancePerPulse(1./2048);
-
     
-
-  
-
-    
-
-       
-
   }
 
-
   //HELPER METHODS FOR THE DRIVETRAIN
-
   public void drive(Joystick joy) //metodo para el manejo con control libre.
   {
     differentialDrive.arcadeDrive(joy.getY()*dampenSpeed,joy.getX()*dampenTurn );
